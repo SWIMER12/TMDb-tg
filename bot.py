@@ -3,8 +3,12 @@ from random import sample
 from telebot import types
 from flask import Flask
 
-# Webhook endpoint
+TOKEN = "YOUR_TOKEN"
+API_KEY = "YOUR_API_KEY"
+
+bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
+
 @app.route(f"/{TOKEN}", methods=["POST"])
 def webhook():
     json_str = request.get_data().decode("utf-8")
@@ -12,18 +16,13 @@ def webhook():
     bot.process_new_updates([update])
     return "ok", 200
 
-# Главная страница (можно проверить в браузере)
 @app.route("/")
 def index():
     return "Бот онлайн"
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Render автоматически подставляет свой порт
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
-API_KEY = "YOUR_API_KEY"
-TOKEN = "YOUR_TOKEN"
-bot = telebot.TeleBot(TOKEN)
 
 class Movie:
     def __init__(self, data):
