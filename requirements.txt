@@ -1,0 +1,8 @@
+certifi==2026.2.25
+charset-normalizer==3.4.4
+idna==3.11
+pygame==2.6.1
+PySocks==1.7.1
+pyTelegramBotAPI==4.31.0
+requests==2.32.5
+urllib3==2.6.3
