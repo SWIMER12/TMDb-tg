@@ -111,7 +111,7 @@ def superMovie(user_url, user_params, mode):
     
 def error(message):
     markup = types.InlineKeyboardMarkup(row_width=1)
-    button_1 = types.InlineKeyboardButton("Телеграм канал разработчика",url="https://t.me/SWIMER121")
+    button_1 = types.InlineKeyboardButton("Связаться с разработчиком",url="https://t.me/SWIMER121")
     markup.add(button_1)
     bot.send_message(message.chat.id,"Извините, бот испытывает неполадки. Напишите позднее или обратитесь в поддержку",reply_markup=markup)
 
