@@ -3,15 +3,22 @@ from random import sample
 from telebot import types
 from flask import Flask
 
+# Webhook endpoint
 app = Flask(__name__)
+@app.route(f"/{TOKEN}", methods=["POST"])
+def webhook():
+    json_str = request.get_data().decode("utf-8")
+    update = telebot.types.Update.de_json(json_str)
+    bot.process_new_updates([update])
+    return "ok", 200
 
+# Главная страница (можно проверить в браузере)
 @app.route("/")
 def index():
-    return "Бот работает"
+    return "Бот онлайн"
 
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5000))  # Render автоматически подставляет свой порт
     app.run(host="0.0.0.0", port=port)
 
 API_KEY = "YOUR_API_KEY"
