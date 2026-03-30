@@ -294,5 +294,3 @@ def handle_text(message):
 @bot.message_handler(content_types=["photo","document","video"])
 def handle_photo(message):
     bot.send_message(message.chat.id,"📸 Я не умею обрабатывать эти данные 😅\n\nНапиши название фильма или используй команды /help")     
-
-bot.polling()
