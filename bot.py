@@ -5,6 +5,8 @@ from flask import Flask, request
 
 TOKEN = os.environ.get("TELEGRAM_TOKEN")
 API_KEY = os.environ.get("TMDB_API_KEY")
+print("TELEGRAM_TOKEN:", TOKEN)
+print("TMDB_API_KEY:", API_KEY)
 
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
