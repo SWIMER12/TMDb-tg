@@ -235,6 +235,7 @@ def search(message):
         query = " ".join(message.text.split()[1:])
         if not query:
             bot.reply_to(message, "🔎 Напиши название фильма после команды.\n\nПример: /search Интерстеллар")
+            return
         list_of_movies = superMovie("/search/movie",{"query":query,"sort_by": "popularity.desc"},"top")
         
     elif command == "top":
