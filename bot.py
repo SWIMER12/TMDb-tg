@@ -1,34 +1,11 @@
-import telebot, requests,os
+import telebot, requests
 from random import sample
 from telebot import types
-from flask import Flask, request
 
 TOKEN = os.environ.get("TELEGRAM_TOKEN")
 API_KEY = os.environ.get("TMDB_API_KEY")
-print("TELEGRAM_TOKEN:", TOKEN)
-print("TMDB_API_KEY:", API_KEY)
 
 bot = telebot.TeleBot(TOKEN)
-app = Flask(__name__)
-
-WEBHOOK_URL = f"https://tmdb-tg.onrender.com/{TOKEN}"
-
-def setup_webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url=WEBHOOK_URL)
-
-@app.route(f"/{TOKEN}", methods=["POST"])
-def webhook():
-    print("Update received")
-    json_string = request.get_data().decode('utf-8')
-    print(json_string)
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return "ok", 200
-
-@app.route("/")
-def index():
-    return "Бот онлайн"
 
 class Movie:
     def __init__(self, data):
@@ -302,11 +279,3 @@ def handle_text(message):
 @bot.message_handler(content_types=["photo","document","video"])
 def handle_photo(message):
     bot.send_message(message.chat.id,"📸 Я не умею обрабатывать эти данные 😅\n\nНапиши название фильма или используй команды /help")
-
-
-
-if __name__ == "__main__":
-    setup_webhook()
-    print("Webhook set to:", WEBHOOK_URL)
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
