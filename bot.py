@@ -24,10 +24,6 @@ def webhook():
 def index():
     return "Бот онлайн"
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-
 class Movie:
     def __init__(self, data):
         self.data = data
@@ -297,4 +293,10 @@ def handle_text(message):
 
 @bot.message_handler(content_types=["photo","document","video"])
 def handle_photo(message):
-    bot.send_message(message.chat.id,"📸 Я не умею обрабатывать эти данные 😅\n\nНапиши название фильма или используй команды /help")     
+    bot.send_message(message.chat.id,"📸 Я не умею обрабатывать эти данные 😅\n\nНапиши название фильма или используй команды /help")
+
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
